@@ -6,10 +6,10 @@ import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function AboutYouPiScreen() {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState('');
+  // const [fullName, setFullName] = useState('');
   const [nickname, setNickname] = useState('');
   const [pronouns, setPronouns] = useState('');
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
   const [ddi, setDdi] = useState('');
   const [phone, setPhone] = useState('');
@@ -17,6 +17,7 @@ export default function AboutYouPiScreen() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const userId = userInfo.id;
+  // console.log('userInfo: ', userInfo);
 
   if (!userInfo) {
     navigate('/signin');
@@ -28,10 +29,10 @@ export default function AboutYouPiScreen() {
     dispatch(
       saveAboutYouPi(
         userId,
-        fullName,
+        userInfo.fullName,
         nickname,
         pronouns,
-        email,
+        userInfo.email,
         city,
         ddi,
         phone
@@ -54,9 +55,10 @@ export default function AboutYouPiScreen() {
             type="text"
             id="fullName"
             placeholder=""
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={userInfo.fullName}
+            // onChange={(e) => setFullName(e.target.value)}
             required
+            readOnly="readOnly"
           ></input>
         </div>
         <div>
@@ -89,9 +91,10 @@ export default function AboutYouPiScreen() {
             type="text"
             id="email"
             placeholder=""
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userInfo.email}
+            // onChange={(e) => setEmail(e.target.value)}
             required
+            readOnly="readOnly"
           ></input>
         </div>
         <div>
@@ -119,6 +122,7 @@ export default function AboutYouPiScreen() {
             >
               <option value="brazil">+55</option>
               <option value="usa">+1</option>
+              <option value="portugal">+351</option>
             </select>
             <input
               className="phone2"

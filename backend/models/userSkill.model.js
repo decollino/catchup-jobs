@@ -12,6 +12,10 @@ const UserSkill = db.define(
       allowNull: false,
       primaryKey: true,
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     yearsOfXp: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -21,6 +25,5 @@ const UserSkill = db.define(
 );
 
 UserSkill.belongsTo(User, { foreignKey: 'userId' });
-UserSkill.belongsTo(Skill, { foreignKey: 'skillId' });
 
 export default UserSkill;

@@ -8,8 +8,8 @@ export default function SkillsScreen() {
   const navigate = useNavigate();
   const [popularSkill, setPopularSkill] = useState('');
   const [popYearsOfXp, setPopYearsOfXp] = useState('');
-  const [othersSkill, setOthersSkill] = useState('');
-  const [othYearsOfXp, setOthYearsOfXp] = useState('');
+  // const [othersSkill, setOthersSkill] = useState('');
+  // const [othYearsOfXp, setOthYearsOfXp] = useState('');
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -23,7 +23,8 @@ export default function SkillsScreen() {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveSkills(popularSkill, othersSkill, popYearsOfXp, othYearsOfXp));
+    dispatch(saveSkills(popularSkill, popYearsOfXp));
+    // dispatch(saveSkills(popularSkill, othersSkill, popYearsOfXp, othYearsOfXp));
     dispatch(createProfile(profile));
     navigate('/');
   };
@@ -52,14 +53,14 @@ export default function SkillsScreen() {
             value={popYearsOfXp}
             required
           >
-            <option value="1">Less than 1 year</option>
-            <option value="2">1 to 2 years</option>
-            <option value="3">3 to 5 years</option>
-            <option value="4">6 to 9 years</option>
-            <option value="5">More than 9 years</option>
+            <option value="Less than 1 year">Less than 1 year</option>
+            <option value="1 to 2 years">1 to 2 years</option>
+            <option value="3 to 5 years">3 to 5 years</option>
+            <option value="6 to 9 years">6 to 9 years</option>
+            <option value="More than 9 years">More than 9 years</option>
           </select>
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="othersSkill">Others Skills</label>
           <input
             type="text"
@@ -82,7 +83,7 @@ export default function SkillsScreen() {
             <option value="4">6 to 9 years</option>
             <option value="5">More than 9 years</option>
           </select>
-        </div>
+        </div> */}
         <div>
           <label />
           <button className="primary" type="submit">

@@ -23,7 +23,7 @@ async function registerUser(user) {
       email: user.email,
       password: bcrypt.hashSync(user.password, 8),
       type: user.type,
-      fullName: '',
+      fullName: user.fullName,
       nickname: '',
       pronouns: '',
       city: '',
@@ -95,17 +95,16 @@ async function oauthUser(user, userBd) {
 
 async function updateUser(user) {
   try {
+    console.log('repository - updateUser - user: ', user);
     await User.update(
       {
-        fullName: user.fullName,
         nickname: user.nickname,
         pronouns: user.pronouns,
         city: user.city,
         ddi: user.ddi,
         phone: user.phone,
         profileUrl: user.profileUrl,
-        chkPc: user.chkPc,
-        jobTitleId: user.jobTitleId,
+        jobTitle: user.jobTitle,
         yearsOfXp: user.yearsOfXp,
       },
       {

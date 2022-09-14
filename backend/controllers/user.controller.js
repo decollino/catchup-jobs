@@ -57,6 +57,7 @@ async function signinUser(req, res, next) {
 async function registerUser(req, res, next) {
   try {
     let user = req.body;
+    // console.log('user: ', user);
     if (!user.email || !user.password) {
       throw new Error('The email and password are requerired!');
     }

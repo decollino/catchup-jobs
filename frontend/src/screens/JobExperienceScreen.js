@@ -40,12 +40,12 @@ export default function JobExperienceScreen() {
             required
           ></input>
         </div>
-        <div>
+        {/* <div>
           <label />
           <button className="primary" type="submit">
             Connect LinkedIn
           </button>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="profileUrlProfessional">Professional</label>
         </div>

@@ -50,8 +50,8 @@ const User = db.define(
     chkTpp: {
       type: Sequelize.BOOLEAN,
     },
-    jobTitleId: {
-      type: Sequelize.INTEGER,
+    jobTitle: {
+      type: Sequelize.STRING,
     },
     yearsOfXp: {
       type: Sequelize.STRING,

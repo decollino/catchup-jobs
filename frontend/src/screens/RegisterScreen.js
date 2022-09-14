@@ -7,10 +7,11 @@ import MessageBox from '../components/MessageBox';
 
 export default function RegisterScreen() {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [chkTpp, setChkTpp] = useState('');
 
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
@@ -26,7 +27,7 @@ export default function RegisterScreen() {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match');
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(fullName, email, password, chkTpp));
     }
   };
   useEffect(() => {
@@ -45,13 +46,13 @@ export default function RegisterScreen() {
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
-            id="name"
-            placeholder="Enter name"
+            id="fullName"
+            placeholder="Enter your full name"
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
           ></input>
         </div>
         <div>
@@ -83,6 +84,15 @@ export default function RegisterScreen() {
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="chkTpp"
+            name="chkTpp"
+            onChange={(e) => setChkTpp(e.target.value)}
+          ></input>
+          <label htmlFor="chkTpp">Term and Privacy Policy</label>
         </div>
         <div>
           <label />

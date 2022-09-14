@@ -77,15 +77,12 @@ export const saveJobExperience = (profileUrl) => async (dispatch, getState) => {
 };
 
 export const saveSkills =
-  (popularSkill, othersSkill, popYearsOfXp, othYearsOfXp) =>
-  async (dispatch, getState) => {
+  (popularSkill, popYearsOfXp) => async (dispatch, getState) => {
     dispatch({
       type: PROFILE_SAVE_SKILLS,
       payload: {
         popularSkill,
-        othersSkill,
         popYearsOfXp,
-        othYearsOfXp,
       },
     });
     localStorage.setItem('skills', JSON.stringify(getState().profile.skills));

@@ -10,6 +10,9 @@ async function registerProfile(req, res, next) {
       skills: req.body.skills,
     };
 
+    console.log('controller - registerProfile');
+    console.log('profile: ', profile);
+
     const createdProfile = await profileService.registerProfile(profile);
     res.send({ message: 'New Profile Created', profile: createdProfile });
 

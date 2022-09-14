@@ -12,6 +12,10 @@ const UserLanguage = db.define(
       allowNull: false,
       primaryKey: true,
     },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     level: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -21,6 +25,5 @@ const UserLanguage = db.define(
 );
 
 UserLanguage.belongsTo(User, { foreignKey: 'userId' });
-UserLanguage.belongsTo(Language, { foreignKey: 'languageId' });
 
 export default UserLanguage;

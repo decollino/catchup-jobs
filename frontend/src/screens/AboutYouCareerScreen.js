@@ -23,6 +23,7 @@ export default function AboutYouCareerScreen() {
     navigate('/aboutyoulanguage');
   };
 
+  console.log('AboutYouCareerScreen New');
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
@@ -64,7 +65,7 @@ export default function AboutYouCareerScreen() {
               <input
                 type="radio"
                 id="2"
-                value="2"
+                value="1 to 2 years"
                 name="yearsOfExperience"
                 required
                 onChange={(e) => setYearsOfExperience(e.target.value)}
@@ -77,7 +78,7 @@ export default function AboutYouCareerScreen() {
               <input
                 type="radio"
                 id="3"
-                value="3"
+                value="3 to 5 years"
                 name="yearsOfExperience"
                 required
                 onChange={(e) => setYearsOfExperience(e.target.value)}
@@ -90,7 +91,7 @@ export default function AboutYouCareerScreen() {
               <input
                 type="radio"
                 id="4"
-                value="4"
+                value="6 to 9 years"
                 name="yearsOfExperience"
                 required
                 onChange={(e) => setYearsOfExperience(e.target.value)}
@@ -103,7 +104,7 @@ export default function AboutYouCareerScreen() {
               <input
                 type="radio"
                 id="5"
-                value="5"
+                value="More than 9 years"
                 name="yearsOfExperience"
                 required
                 onChange={(e) => setYearsOfExperience(e.target.value)}

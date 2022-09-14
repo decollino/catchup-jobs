@@ -30,10 +30,11 @@ export default function AboutYouLanguageScreen() {
     navigate('/jobexperience');
   };
 
-  useEffect(() => {
-    dispatch(listLanguage());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(listLanguage());
+  // }, []);
 
+  console.log('AboutYouLanguageScreen New');
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
@@ -68,7 +69,7 @@ export default function AboutYouLanguageScreen() {
             </select>
           </div>
         </div>
-        <div>
+        {/* <div>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
@@ -84,7 +85,7 @@ export default function AboutYouLanguageScreen() {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
         <div>
           <label />
           <button className="primary" type="submit">
