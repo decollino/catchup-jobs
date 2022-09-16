@@ -49,12 +49,11 @@ export const saveAboutYouCareer =
   };
 
 export const saveAboutYouLanguage =
-  (language, level) => async (dispatch, getState) => {
+  (language) => async (dispatch, getState) => {
     dispatch({
       type: PROFILE_SAVE_ABOUTYOU_LANGUAGE,
       payload: {
         language,
-        level,
       },
     });
     localStorage.setItem(

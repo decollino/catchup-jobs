@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listLanguage } from '../actions/languageActions';
 import { saveAboutYouLanguage } from '../actions/profileActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import LoadingBox from '../components/LoadingBox';
@@ -16,19 +15,17 @@ export default function AboutYouLanguageScreen() {
   const [language, setLanguage] = useState([
     {
       text: 'Portuguese',
-      rating: 1,
+      rating: 'Native',
     },
   ]);
-  const [level, setLevel] = useState('');
+  // const [level, setLevel] = useState('');
 
   const [rating, setRating] = useState(1);
-  // const [text, setText] = useState('');
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [feedbackEdit, setFeedbackEdit] = useState({
+  // const [btnDisabled, setBtnDisabled] = useState(true);
+  const [languageEdit, setLanguageEdit] = useState({
     item: {},
     edit: false,
   });
-  // const [feedback, setFeedback] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -43,29 +40,42 @@ export default function AboutYouLanguageScreen() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveAboutYouLanguage(language, level));
+    dispatch(saveAboutYouLanguage(language));
     navigate('/jobexperience');
   };
 
   const submitHandler2 = (e) => {
-    console.log('*** submitHandler2 ***');
     e.preventDefault();
-    console.log('*** text ***: ', text);
-    console.log('*** text.trim().length ***: ', text.trim().length);
     if (text.trim().length > 3) {
       const newLanguage = {
         text,
         rating,
       };
 
-      if (feedbackEdit.edit === true) {
-        updateFeedback(feedbackEdit.item.text, newLanguage);
+      if (newLanguage.rating === 1) {
+        newLanguage.rating = 'Basic';
+      }
+      if (newLanguage.rating === 2) {
+        newLanguage.rating = 'Intermediate';
+      }
+      if (newLanguage.rating === 3) {
+        newLanguage.rating = 'Advanced';
+      }
+      if (newLanguage.rating === 4) {
+        newLanguage.rating = 'Fluent';
+      }
+      if (newLanguage.rating === 5) {
+        newLanguage.rating = 'Native';
+      }
+
+      if (languageEdit.edit === true) {
+        updateLanguage(languageEdit.item.text, newLanguage);
       } else {
         addLanguage(newLanguage);
       }
 
       setText('');
-      setFeedbackEdit({
+      setLanguageEdit({
         item: {},
         edit: false,
       });
@@ -73,14 +83,10 @@ export default function AboutYouLanguageScreen() {
   };
 
   const addLanguage = async (newLanguage) => {
-    console.log('*** addLanguage ***');
-    console.log('newLanguage: ', newLanguage);
-    console.log('language before: ', language);
     setLanguage([newLanguage, ...language]);
-    console.log('language after: ', language);
   };
 
-  const updateFeedback = async (text, updItem) => {
+  const updateLanguage = async (text, updItem) => {
     setLanguage(
       language.map((item) =>
         item.text === text ? { ...item, ...updItem } : item
@@ -88,74 +94,67 @@ export default function AboutYouLanguageScreen() {
     );
   };
 
-  const deleteFeedback = async (id) => {
-    console.log('*** deleteFeedback ***  ');
-    console.log('*** id *** : ', id);
+  const deleteLanguage = async (id) => {
     setLanguage(language.filter((item) => item.text !== id));
   };
 
   // set item to be updated
   const editLanguage = (item) => {
-    setFeedbackEdit({
+    setLanguageEdit({
       item,
       edit: true,
     });
   };
 
-  // useEffect(() => {
-  //   dispatch(listLanguage());
-  // }, []);
   useEffect(() => {
-    if (feedbackEdit.edit === true) {
+    if (languageEdit.edit === true) {
       // setBtnDisabled(false);
-      setText(feedbackEdit.item.text);
-      setRating(feedbackEdit.item.rating);
+      setText(languageEdit.item.text);
+      setRating(languageEdit.item.rating);
     }
-  }, [feedbackEdit]);
+  }, [languageEdit]);
 
-  console.log('feedbackEdit : ', feedbackEdit);
-  console.log('AboutYouLanguageScreen New');
+  // console.log('AboutYouLanguageScreen New');
   return (
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
-      <div>
-        <h1>About You - Step 3 - Language</h1>
-      </div>
       <form className="form" onSubmit={submitHandler2}>
+        <div>
+          <h1>About You - Step 3 - Language</h1>
+        </div>
         <RatingSelect
           select={(rating) => setRating(rating)}
-          feedbackEdit={feedbackEdit}
+          languageEdit={languageEdit}
         />
         <div>
-          <label htmlFor="language">Language</label>
           <input
             type="text"
             id="text"
-            placeholder=""
+            placeholder="Write and Rate your language skill"
             value={text}
             onChange={(e) => setText(e.target.value)}
             required
           ></input>
-        </div>
-        <div>
-          <label />
-          <button className="primary" type="submit">
-            Add
-          </button>
+          <div>
+            <label />
+            <button className="primary" type="submit">
+              Send
+            </button>
+          </div>
         </div>
       </form>
       {isLoading ? (
         <p>No Language Yet</p>
       ) : (
-        <div className="feedback-list">
+        <div className="card">
           {language.map((item, id) => (
             <div key={id}>
-              {console.log('item: ', item)}
-              <div>{item.rating}</div>
-              <div>{item.text}</div>
+              {item.rating}
+              {item.text}
+              {/* {ratingLanguage(item)} */}
               <button
                 className="close"
-                onClick={() => deleteFeedback(item.text)}
+                onClick={() => deleteLanguage(item.text)}
               ></button>
               <button
                 onClick={() => editLanguage(item)}
@@ -164,7 +163,7 @@ export default function AboutYouLanguageScreen() {
             </div>
           ))}
         </div>
-      )}
+      )}{' '}
       <form className="form" onSubmit={submitHandler}>
         <div>
           <label />

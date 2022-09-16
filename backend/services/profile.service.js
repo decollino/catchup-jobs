@@ -30,15 +30,29 @@ async function registerProfile(profile) {
   // Language
   // const language = profile.aboutYouLanguage.language;
   // const level = profile.aboutYouLanguage.level;
-  const userLanguage = {
-    userId: profile.aboutYouPi.id,
-    name: profile.aboutYouLanguage.language,
-    level: profile.aboutYouLanguage.level,
-  };
-  console.log('userLanguage: ', userLanguage);
-  const newUserLanguage = await userLanguageRepository.createUserLanguage(
-    userLanguage
-  );
+  // const userLanguage = {
+  //   userId: profile.aboutYouPi.id,
+  //   name: profile.aboutYouLanguage.language,
+  //   level: profile.aboutYouLanguage.level,
+  // };
+  // console.log('userLanguage: ', userLanguage);
+  console.log('profile.aboutYouLanguage: ', profile.aboutYouLanguage);
+  // const newUserLanguage = await userLanguageRepository.createUserLanguage(
+  //   profile.aboutYouLanguage
+  // );
+
+  let newUserLanguage = '';
+  if (profile.aboutYouLanguage.length === 1) {
+    const userLanguage = profile.aboutYouLanguage[0];
+    newUserLanguage = await userLanguageRepository.createUserLanguage(
+      userLanguage
+    );
+  } else {
+    newUserLanguage = await userLanguageRepository.createUsersLanguages(
+      profile.aboutYouLanguage
+    );
+  }
+  console.log('newUserLanguage: ', newUserLanguage);
 
   // skill
   // const skill = profile.skills.popularSkill;

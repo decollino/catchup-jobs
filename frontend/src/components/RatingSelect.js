@@ -1,26 +1,19 @@
 import React from 'react';
-import { useState, useContext, useEffect } from 'react';
-// import FeedbackContext from '../context/FeedbackContext';
+import { useState, useEffect } from 'react';
 
 function RatingSelect(props) {
-  // console.log('props: ', props);
-  console.log('select: ', props.select);
-  console.log('feedbackEdit: ', props.feedbackEdit);
-
   const [selected, setSelected] = useState(1);
 
-  // const { feedbackEdit } = useContext(FeedbackContext);
-
   useEffect(() => {
-    setSelected(props.feedbackEdit.item.rating);
-  }, [props.feedbackEdit]);
+    setSelected(props.languageEdit.item.rating);
+  }, [props.languageEdit]);
 
   const handleChange = (e) => {
     setSelected(+e.currentTarget.value);
     props.select(+e.currentTarget.value);
   };
 
-  console.log('RatingSelect');
+  // console.log('RatingSelect');
   return (
     <ul className="rating">
       <li>
@@ -28,9 +21,9 @@ function RatingSelect(props) {
           type="radio"
           id="native"
           name="rating"
-          value="1"
+          value="5"
           onChange={handleChange}
-          checked={selected === 1}
+          checked={selected === 5}
         />
         <label htmlFor="native">Native</label>
       </li>
@@ -39,9 +32,9 @@ function RatingSelect(props) {
           type="radio"
           id="fluent"
           name="rating"
-          value="2"
+          value="4"
           onChange={handleChange}
-          checked={selected === 2}
+          checked={selected === 4}
         />
         <label htmlFor="fluent">Fluent</label>
       </li>
@@ -61,9 +54,9 @@ function RatingSelect(props) {
           type="radio"
           id="intermediate"
           name="rating"
-          value="4"
+          value="2"
           onChange={handleChange}
-          checked={selected === 4}
+          checked={selected === 2}
         />
         <label htmlFor="intermediate">Intermediate</label>
       </li>
@@ -72,9 +65,9 @@ function RatingSelect(props) {
           type="radio"
           id="basic"
           name="rating"
-          value="5"
+          value="1"
           onChange={handleChange}
-          checked={selected === 5}
+          checked={selected === 1}
         />
         <label htmlFor="basic">Basic</label>
       </li>

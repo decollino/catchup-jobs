@@ -3,6 +3,7 @@ import User from '../models/user.model.js';
 import UserLanguage from '../models/userLanguage.model.js';
 
 async function createUserLanguage(userLanguage) {
+  console.log('createUserLanguage -userLanguage: ', userLanguage);
   try {
     return await UserLanguage.create(userLanguage);
   } catch (err) {
@@ -11,6 +12,7 @@ async function createUserLanguage(userLanguage) {
 }
 
 async function createUsersLanguages(userLanguageList) {
+  console.log('createUsersLanguages -userLanguageList: ', userLanguageList);
   try {
     return await UserLanguage.bulkCreate(userLanguageList);
   } catch (err) {

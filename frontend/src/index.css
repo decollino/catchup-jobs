@@ -302,3 +302,12 @@ img.large {
   background: #f0c040;
   color: #fff;
 }
+
+.card {
+  background-color: #fff;
+  color: #333;
+  border-radius: 15px;
+  padding: 10px 10px;
+  margin: 20px 0;
+  position: relative;
+}
