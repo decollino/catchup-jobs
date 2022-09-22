@@ -5,10 +5,11 @@ import AboutYouCareerScreen from './screens/AboutYouCareerScreen';
 import AboutYouLanguageScreen from './screens/AboutYouLanguageScreen';
 import AboutYouPi from './screens/AboutYouPiScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import EducationScreen from './screens/EducationScreen';
 import JobExperienceScreen from './screens/JobExperienceScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
-import SkillsScreen from './screens/SkillsScreen';
+import SkillScreen from './screens/SkillScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -63,7 +64,8 @@ function App() {
               path="/jobexperience"
               element={<JobExperienceScreen />}
             ></Route>
-            <Route path="/skills" element={<SkillsScreen />}></Route>
+            <Route path="/education" element={<EducationScreen />}></Route>
+            <Route path="/skills" element={<SkillScreen />}></Route>
             <Route path="/" element={<DashboardScreen />} exact></Route>
           </Routes>
         </main>

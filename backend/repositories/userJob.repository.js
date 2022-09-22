@@ -1,3 +1,4 @@
+import User from '../models/user.model.js';
 import UserJob from '../models/userJob.model.js';
 
 async function createUserJob(userJob) {

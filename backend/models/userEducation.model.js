@@ -1,9 +1,6 @@
 import Sequelize from 'sequelize';
 import db from '../repositories/db.js';
 import User from './user.model.js';
-import Course from './course.model.js';
-import School from './school.model.js';
-import Degree from './degree.model.js';
 
 const UserEducation = db.define(
   'user_educations',
@@ -27,7 +24,7 @@ const UserEducation = db.define(
       allowNull: false,
     },
     endPeriod: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
       allowNull: false,
     },
   },

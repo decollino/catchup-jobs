@@ -22,11 +22,11 @@ const UserJob = db.define(
       allowNull: false,
     },
     startPeriod: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     endPeriod: {
-      type: Sequelize.DATE,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     description: {

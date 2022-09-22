@@ -4,11 +4,12 @@ import {
   PROFILE_SAVE_ABOUTYOU_CAREER,
   PROFILE_SAVE_ABOUTYOU_LANGUAGE,
   PROFILE_SAVE_JOBEXPERIENCE,
-  PROFILE_SAVE_SKILLS,
+  PROFILE_SAVE_SKILL,
   PROFILE_CREATE_FAIL,
   PROFILE_CREATE_SUCCESS,
   PROFILE_CREATE_REQUEST,
   PROFILE_EMPTY,
+  PROFILE_SAVE_EDUCATION,
 } from '../constants/profileConstants';
 
 export const saveAboutYouPi =
@@ -62,30 +63,42 @@ export const saveAboutYouLanguage =
     );
   };
 
-export const saveJobExperience = (profileUrl) => async (dispatch, getState) => {
+export const saveJobExperience =
+  (profileUrl, professionalXp) => async (dispatch, getState) => {
+    dispatch({
+      type: PROFILE_SAVE_JOBEXPERIENCE,
+      payload: {
+        profileUrl,
+        professionalXp,
+      },
+    });
+    localStorage.setItem(
+      'jobExperience',
+      JSON.stringify(getState().profile.jobExperience)
+    );
+  };
+
+export const saveEducation = (education) => async (dispatch, getState) => {
   dispatch({
-    type: PROFILE_SAVE_JOBEXPERIENCE,
-    payload: {
-      profileUrl,
-    },
+    type: PROFILE_SAVE_EDUCATION,
+    payload: { education },
   });
   localStorage.setItem(
-    'jobExperience',
-    JSON.stringify(getState().profile.jobExperience)
+    'education',
+    JSON.stringify(getState().profile.education)
   );
 };
 
-export const saveSkills =
-  (popularSkill, popYearsOfXp) => async (dispatch, getState) => {
-    dispatch({
-      type: PROFILE_SAVE_SKILLS,
-      payload: {
-        popularSkill,
-        popYearsOfXp,
-      },
-    });
-    localStorage.setItem('skills', JSON.stringify(getState().profile.skills));
-  };
+export const saveSkill = (skill) => async (dispatch, getState) => {
+  console.log('*** profileAction - saveSkill - skill ***: ', skill);
+  dispatch({
+    type: PROFILE_SAVE_SKILL,
+    payload: {
+      skill,
+    },
+  });
+  localStorage.setItem('skill', JSON.stringify(getState().profile.skill));
+};
 
 export const createProfile = (profile) => async (dispatch, getState) => {
   dispatch({ type: PROFILE_CREATE_REQUEST, payload: profile });

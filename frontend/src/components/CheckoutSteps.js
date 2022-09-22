@@ -6,7 +6,8 @@ export default function CheckoutSteps(props) {
       <div className={props.step1 ? 'active' : ''}>Sign-In</div>
       <div className={props.step2 ? 'active' : ''}>About You</div>
       <div className={props.step3 ? 'active' : ''}>Job Experience</div>
-      <div className={props.step4 ? 'active' : ''}>Skills</div>
+      <div className={props.step4 ? 'active' : ''}>Education</div>
+      <div className={props.step5 ? 'active' : ''}>Skills</div>
     </div>
   );
 }

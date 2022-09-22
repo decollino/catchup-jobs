@@ -1,5 +1,5 @@
 import userRepository from '../repositories/user.repository.js';
-import userCareerRepository from '../repositories/userCareer.repository.js';
+import userEducationRepository from '../repositories/userEducation.repository.js';
 import userJobRepository from '../repositories/userJob.repository.js';
 import userLanguageRepository from '../repositories/userLanguage.repository.js';
 import userSkillRepository from '../repositories/userSkill.repository.js';
@@ -8,39 +8,19 @@ async function registerProfile(profile) {
   console.log('service - registerProfile');
   // User
   const userPersonalInfo = {
-    ...profile.aboutYouPi,
-    ...profile.jobExperience.profileUrl,
-    ...profile.aboutYouCareer,
+    id: profile.aboutYouPi.id,
+    nickname: profile.aboutYouPi.nickname,
+    pronouns: profile.aboutYouPi.pronouns,
+    city: profile.aboutYouPi.city,
+    ddi: profile.aboutYouPi.ddi,
+    phone: profile.aboutYouPi.phone,
+    profileUrl: profile.profileUrl,
+    jobTitle: profile.aboutYouCareer.jobTitle,
+    yearsOfXp: profile.aboutYouCareer.yearsOfExperience,
   };
   const newUserPersonalInfo = await userRepository.updateUser(userPersonalInfo);
 
-  // Career
-  // const userId = profile.aboutYouPi.id;
-  // const careerId = profile.aboutYouCareer.jobTitle;
-  // const jobTitle = profile.aboutYouCareer.jobTitle;
-  // const yearsOfXpCareer = profile.aboutYouCareer.yearsOfExperience;
-  // const userJob = {
-  //   userId,
-  //   jobTitle,
-  //   yearsOfXpCareer,
-  // };
-  // const newUserJob = await userJobRepository.registerUserJob(userJob);
-  // const newUserCareer = await userCareerRepository.registerUserCareer(userJob);
-
-  // Language
-  // const language = profile.aboutYouLanguage.language;
-  // const level = profile.aboutYouLanguage.level;
-  // const userLanguage = {
-  //   userId: profile.aboutYouPi.id,
-  //   name: profile.aboutYouLanguage.language,
-  //   level: profile.aboutYouLanguage.level,
-  // };
-  // console.log('userLanguage: ', userLanguage);
-  console.log('profile.aboutYouLanguage: ', profile.aboutYouLanguage);
-  // const newUserLanguage = await userLanguageRepository.createUserLanguage(
-  //   profile.aboutYouLanguage
-  // );
-
+  // User Language
   let newUserLanguage = '';
   if (profile.aboutYouLanguage.length === 1) {
     const userLanguage = profile.aboutYouLanguage[0];
@@ -52,20 +32,45 @@ async function registerProfile(profile) {
       profile.aboutYouLanguage
     );
   }
-  console.log('newUserLanguage: ', newUserLanguage);
 
-  // skill
-  // const skill = profile.skills.popularSkill;
-  // const yearsOfXpSkill = profile.skills.yearsOfXp;
-  const userSkill = {
-    userId: profile.aboutYouPi.id,
-    name: profile.skills.popularSkill,
-    yearsOfXp: profile.skills.popYearsOfXp,
+  // User Skill
+  let newUserSkill = '';
+  if (profile.skills.length === 1) {
+    const userSkill = profile.skills[0];
+    newUserSkill = await userSkillRepository.createUserSkill(userSkill);
+  } else {
+    newUserSkill = await userSkillRepository.createUserSkills(profile.skills);
+  }
+
+  // User Educations
+  let newUserEducation = '';
+  if (profile.education.length === 1) {
+    const userEducation = profile.education[0];
+    newUserEducation = await userEducationRepository.createUserEducation(
+      userEducation
+    );
+  } else {
+    newUserEducation = await userEducationRepository.createUserEducations(
+      profile.education
+    );
+  }
+
+  // User Jobs
+  let newUserJob = '';
+  if (profile.jobExperience.length === 1) {
+    const userJob = profile.jobExperience[0];
+    newUserJob = await userJobRepository.createUserJob(userJob);
+  } else {
+    newUserJob = await userJobRepository.createUserJobs(profile.jobExperience);
+  }
+
+  return {
+    newUserPersonalInfo,
+    newUserLanguage,
+    newUserSkill,
+    newUserEducation,
+    newUserJob,
   };
-  console.log('userSkill: ', userSkill);
-  const newUserSkill = await userSkillRepository.createUserSkill(userSkill);
-
-  return { newUserPersonalInfo, newUserLanguage, newUserSkill };
 }
 
 export default {

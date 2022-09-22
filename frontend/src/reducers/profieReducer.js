@@ -6,8 +6,9 @@ import {
   PROFILE_SAVE_ABOUTYOU_CAREER,
   PROFILE_SAVE_ABOUTYOU_LANGUAGE,
   PROFILE_SAVE_ABOUTYOU_PI,
+  PROFILE_SAVE_EDUCATION,
   PROFILE_SAVE_JOBEXPERIENCE,
-  PROFILE_SAVE_SKILLS,
+  PROFILE_SAVE_SKILL,
 } from '../constants/profileConstants';
 
 export const profileReducer = (state = {}, action) => {
@@ -20,8 +21,10 @@ export const profileReducer = (state = {}, action) => {
       return { ...state, aboutYouLanguage: action.payload };
     case PROFILE_SAVE_JOBEXPERIENCE:
       return { ...state, jobExperience: action.payload };
-    case PROFILE_SAVE_SKILLS:
-      return { ...state, skills: action.payload };
+    case PROFILE_SAVE_EDUCATION:
+      return { ...state, education: action.payload };
+    case PROFILE_SAVE_SKILL:
+      return { ...state, skill: action.payload };
     case PROFILE_CREATE_REQUEST:
       return { loading: true };
     case PROFILE_CREATE_SUCCESS:

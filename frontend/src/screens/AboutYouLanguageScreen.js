@@ -5,6 +5,7 @@ import { saveAboutYouLanguage } from '../actions/profileActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import RatingInput from '../components/RatingInput';
 import RatingSelect from '../components/RatingSelect';
 
 export default function AboutYouLanguageScreen() {
@@ -14,8 +15,8 @@ export default function AboutYouLanguageScreen() {
   const [text, setText] = useState('');
   const [language, setLanguage] = useState([
     {
-      text: 'Portuguese',
-      rating: 'Native',
+      text: '',
+      rating: '',
     },
   ]);
   // const [level, setLevel] = useState('');
@@ -83,6 +84,11 @@ export default function AboutYouLanguageScreen() {
   };
 
   const addLanguage = async (newLanguage) => {
+    if (language.length > 0) {
+      if (language[0].text === '' && language[0].rating === '') {
+        language.splice(0, 1);
+      }
+    }
     setLanguage([newLanguage, ...language]);
   };
 
@@ -94,8 +100,8 @@ export default function AboutYouLanguageScreen() {
     );
   };
 
-  const deleteLanguage = async (id) => {
-    setLanguage(language.filter((item) => item.text !== id));
+  const deleteLanguage = async (text) => {
+    setLanguage(language.filter((item) => item.text !== text));
   };
 
   // set item to be updated
@@ -126,6 +132,7 @@ export default function AboutYouLanguageScreen() {
           select={(rating) => setRating(rating)}
           languageEdit={languageEdit}
         />
+        {/* <RatingInput value={text} /> */}
         <div>
           <input
             type="text"
@@ -143,15 +150,18 @@ export default function AboutYouLanguageScreen() {
           </div>
         </div>
       </form>
-      {isLoading ? (
-        <p>No Language Yet</p>
+      {/* {console.log('language map: ', language)} */}
+      {/* <form className="form"> */}
+      {language[0].text === '' ? (
+        <div className="card">
+          <p>No Language to show!</p>
+        </div>
       ) : (
         <div className="card">
           {language.map((item, id) => (
             <div key={id}>
               {item.rating}
               {item.text}
-              {/* {ratingLanguage(item)} */}
               <button
                 className="close"
                 onClick={() => deleteLanguage(item.text)}
@@ -164,6 +174,7 @@ export default function AboutYouLanguageScreen() {
           ))}
         </div>
       )}{' '}
+      {/* </form> */}
       <form className="form" onSubmit={submitHandler}>
         <div>
           <label />

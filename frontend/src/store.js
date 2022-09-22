@@ -27,8 +27,11 @@ const initialState = {
     jobExperience: localStorage.getItem('jobExperience')
       ? JSON.parse(localStorage.getItem('jobExperience'))
       : {},
-    skills: localStorage.getItem('skills')
-      ? JSON.parse(localStorage.getItem('skills'))
+    education: localStorage.getItem('education')
+      ? JSON.parse(localStorage.getItem('education'))
+      : {},
+    skills: localStorage.getItem('skill')
+      ? JSON.parse(localStorage.getItem('skill'))
       : {},
   },
 };
