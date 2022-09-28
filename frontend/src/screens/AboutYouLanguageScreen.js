@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveAboutYouLanguage } from '../actions/profileActions';
 import CheckoutSteps from '../components/CheckoutSteps';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import RatingInput from '../components/RatingInput';
 import RatingSelect from '../components/RatingSelect';
 
 export default function AboutYouLanguageScreen() {
@@ -19,10 +16,8 @@ export default function AboutYouLanguageScreen() {
       rating: '',
     },
   ]);
-  // const [level, setLevel] = useState('');
 
   const [rating, setRating] = useState(1);
-  // const [btnDisabled, setBtnDisabled] = useState(true);
   const [languageEdit, setLanguageEdit] = useState({
     item: {},
     edit: false,
@@ -132,7 +127,6 @@ export default function AboutYouLanguageScreen() {
           select={(rating) => setRating(rating)}
           languageEdit={languageEdit}
         />
-        {/* <RatingInput value={text} /> */}
         <div>
           <input
             type="text"

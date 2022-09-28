@@ -5,7 +5,6 @@ import userLanguageRepository from '../repositories/userLanguage.repository.js';
 import userSkillRepository from '../repositories/userSkill.repository.js';
 
 async function registerProfile(profile) {
-  console.log('service - registerProfile');
   // User
   const userPersonalInfo = {
     id: profile.aboutYouPi.id,

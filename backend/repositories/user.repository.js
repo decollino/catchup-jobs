@@ -95,7 +95,6 @@ async function oauthUser(user, userBd) {
 
 async function updateUser(user) {
   try {
-    console.log('repository - updateUser - user: ', user);
     await User.update(
       {
         nickname: user.nickname,

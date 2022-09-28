@@ -13,6 +13,7 @@ import userJobRouter from './routes/userJobRouter.js';
 import userCareerRouter from './routes/userCareerRouter.js';
 import userLanguageRouter from './routes/userLanguageRouter.js';
 import userSkillRouter from './routes/userSkillRouter.js';
+import vacancyRouter from './routes/vacancyRouter.js';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocument } from './doc.js';
 
@@ -51,6 +52,7 @@ app.use('/api/userJobs', userJobRouter);
 app.use('/api/userCareers', userCareerRouter);
 app.use('/api/userLanguages', userLanguageRouter);
 app.use('/api/userSkills', userSkillRouter);
+app.use('/api/vacancy', vacancyRouter);
 app.get('/', (req, res) => {
   res.send('Server is ready');
 });

@@ -4,12 +4,13 @@ import { signout } from './actions/userActions';
 import AboutYouCareerScreen from './screens/AboutYouCareerScreen';
 import AboutYouLanguageScreen from './screens/AboutYouLanguageScreen';
 import AboutYouPi from './screens/AboutYouPiScreen';
-import DashboardScreen from './screens/DashboardScreen';
+import VacancyScreen from './screens/VacancyScreen';
 import EducationScreen from './screens/EducationScreen';
 import JobExperienceScreen from './screens/JobExperienceScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import SkillScreen from './screens/SkillScreen';
+import VacancyDetailScreen from './screens/VacancyDetailScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -25,7 +26,7 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              tienno
+              catchup jobs
             </Link>
           </div>
           <div>
@@ -66,7 +67,14 @@ function App() {
             ></Route>
             <Route path="/education" element={<EducationScreen />}></Route>
             <Route path="/skills" element={<SkillScreen />}></Route>
-            <Route path="/" element={<DashboardScreen />} exact></Route>
+
+            <Route
+              path="/vacancy/:id"
+              element={<VacancyDetailScreen />}
+              exact
+            ></Route>
+
+            <Route path="/" element={<VacancyScreen />} exact></Route>
           </Routes>
         </main>
         <footer className="row center">All right reserved</footer>

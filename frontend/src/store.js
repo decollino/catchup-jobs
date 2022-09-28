@@ -7,6 +7,10 @@ import {
   userSigninReducer,
 } from './reducers/userReducer';
 import { languageListReducer } from './reducers/languageReducer';
+import {
+  vacancyDetailsReducer,
+  vacancyListReducer,
+} from './reducers/vacancyReducers';
 
 const initialState = {
   userSignin: {
@@ -41,6 +45,8 @@ const reducer = combineReducers({
   userRegisterAboutYouPi: userRegisterAboutYouPiReducer,
   profile: profileReducer,
   languageList: languageListReducer,
+  vacancyList: vacancyListReducer,
+  vacancyDetails: vacancyDetailsReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

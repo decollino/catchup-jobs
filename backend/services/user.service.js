@@ -35,14 +35,9 @@ async function validateResetCodeUser(email) {
 }
 
 async function signinUser(user) {
-  console.log('signin - service');
   const userBd = await userRepository.getUserByEmail(user.email);
-  console.log('userBd: ', userBd);
   if (userBd) {
-    console.log('user.password: ', user.password);
-    console.log('userBd.password: ', userBd.password);
     if (bcrypt.compareSync(user.password, userBd.password)) {
-      console.log('2');
       return {
         id: userBd.id,
         name: userBd.fullName,
