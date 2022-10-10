@@ -12,6 +12,8 @@ import {
   USER_SIGNOUT,
 } from '../constants/userConstants';
 
+const base_backend_url = process.env.REACT_APP_BASE_BACKEND_URL;
+
 export const registerAboutYouPi = (userPi) => async (dispatch) => {
   dispatch({
     type: USER_REGISTERABOUTYOUPI_REQUEST,
@@ -19,7 +21,7 @@ export const registerAboutYouPi = (userPi) => async (dispatch) => {
   });
   try {
     const { data } = await Axios.post(
-      'http://localhost:5000/api/users/registerAboutYouPi',
+      `${base_backend_url}/api/users/registerAboutYouPi`,
       {
         userPi,
       }
@@ -42,7 +44,7 @@ export const register =
     dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
     try {
       const { data } = await Axios.post(
-        'http://localhost:5000/api/users/register',
+        `${base_backend_url}/api/users/register`,
         {
           fullName,
           email,
@@ -68,10 +70,10 @@ export const register =
 export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post(
-      'http://localhost:5000/api/users/signin',
-      { email, password }
-    );
+    const { data } = await Axios.post(`${base_backend_url}/api/users/signin`, {
+      email,
+      password,
+    });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {

@@ -15,6 +15,8 @@ import {
   USER_VACANCY_LIST_SUCCESS,
 } from '../constants/vacancyConstants';
 
+const base_backend_url = process.env.REACT_APP_BASE_BACKEND_URL;
+
 export const listVacancies = () => async (dispatch, getState) => {
   dispatch({
     type: VACANCY_LIST_REQUEST,
@@ -23,7 +25,7 @@ export const listVacancies = () => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await Axios.get('http://localhost:5000/api/vacancy', {
+    const { data } = await Axios.get(`${base_backend_url}/api/vacancy`, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
@@ -44,7 +46,7 @@ export const detailsVacancies = (vacancyId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await Axios.get(
-      `http://localhost:5000/api/vacancy/${vacancyId}`,
+      `${base_backend_url}/api/vacancy/${vacancyId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -72,7 +74,7 @@ export const createUserVacancy =
       } = getState();
       console.log('userInfo: ', userInfo);
       const { data } = await Axios.post(
-        'http://localhost:5000/api/userVacancy',
+        `${base_backend_url}/api/userVacancy`,
         userVacancyInfo,
         {
           headers: {
@@ -105,7 +107,7 @@ export const listUserVacancies = (userId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await Axios.get(
-      `http://localhost:5000/api/userVacancy?userId=${userId}`,
+      `${base_backend_url}/api/userVacancy?userId=${userId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
