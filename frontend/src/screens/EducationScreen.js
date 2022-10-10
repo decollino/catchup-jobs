@@ -223,19 +223,21 @@ export default function EducationScreen() {
         <div className="card">
           {education.map((item, id) => (
             <div key={id}>
-              {item.courseName}
-              {item.schoolName}
-              {item.degreeName}
-              {item.endPeriod}
-              {/* {console.log('item map: ', item)} */}
-              <button
-                className="close"
-                onClick={() => deleteEducation(item)}
-              ></button>
-              <button
-                onClick={() => editEducation(item)}
-                className="edit"
-              ></button>
+              <div className="row">
+                <div className="min-20">{item.courseName}</div>
+                <div className="min-20">{item.schoolName}</div>
+                <div className="min-20">{item.degreeName}</div>
+                <div className="min-20">{item.endPeriod}</div>{' '}
+                {/* {console.log('item map: ', item)} */}
+                <button
+                  className="close"
+                  onClick={() => deleteEducation(item)}
+                ></button>
+                <button
+                  onClick={() => editEducation(item)}
+                  className="edit"
+                ></button>
+              </div>
             </div>
           ))}
         </div>

@@ -11,7 +11,7 @@ export const listLanguage = () => async (dispatch) => {
   });
   try {
     const { data } = await Axios.get('/api/languages');
-    console.log('data: ', data);
+    // console.log('data: ', data);
     dispatch({ type: LANGUAGE_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: LANGUAGE_LIST_FAIL, payload: error.message });

@@ -11,6 +11,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import SigninScreen from './screens/SigninScreen';
 import SkillScreen from './screens/SkillScreen';
 import VacancyDetailScreen from './screens/VacancyDetailScreen';
+import UserVacancyScreen from './screens/UserVacancyScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -73,6 +74,7 @@ function App() {
               element={<VacancyDetailScreen />}
               exact
             ></Route>
+            <Route path="/userVacancy" element={<UserVacancyScreen />}></Route>
 
             <Route path="/" element={<VacancyScreen />} exact></Route>
           </Routes>

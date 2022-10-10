@@ -150,13 +150,18 @@ export default function SkillScreen() {
         <div className="card">
           {skill.map((item, id) => (
             <div key={id}>
-              {item.yearsOfXp}
-              {item.text}
-              <button
-                className="close"
-                onClick={() => deleteSkill(item.text)}
-              ></button>
-              <button onClick={() => editSkill(item)} className="edit"></button>
+              <div className="row">
+                <div className="min-20">{item.yearsOfXp}</div>
+                <div className="min-20">{item.text}</div>
+                <button
+                  className="close"
+                  onClick={() => deleteSkill(item.text)}
+                ></button>
+                <button
+                  onClick={() => editSkill(item)}
+                  className="edit"
+                ></button>
+              </div>
             </div>
           ))}
         </div>

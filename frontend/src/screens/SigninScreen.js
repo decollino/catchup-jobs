@@ -28,7 +28,7 @@ export default function SigninScreen() {
     }
   }, [navigate, redirect, userInfo]);
 
-  console.log('SigninScreen New');
+  // console.log('SigninScreen New');
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>

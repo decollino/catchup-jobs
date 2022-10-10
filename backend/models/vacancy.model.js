@@ -26,6 +26,12 @@ const Vacancy = db.define(
     vacancyDescription: {
       type: Sequelize.STRING,
     },
+    companyDescription: {
+      type: Sequelize.STRING,
+    },
+    vacancyValue: {
+      type: Sequelize.STRING,
+    },
   },
   { underscored: true }
 );

@@ -8,6 +8,8 @@ import {
 } from './reducers/userReducer';
 import { languageListReducer } from './reducers/languageReducer';
 import {
+  userVacancyInfoReducer,
+  userVacancyListReducer,
   vacancyDetailsReducer,
   vacancyListReducer,
 } from './reducers/vacancyReducers';
@@ -38,6 +40,11 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('skill'))
       : {},
   },
+  userVacancyInfo: {
+    vacancyInfo: localStorage.getItem('vacancyInfo')
+      ? JSON.parse(localStorage.getItem('vacancyInfo'))
+      : [],
+  },
 };
 const reducer = combineReducers({
   userSignin: userSigninReducer,
@@ -47,6 +54,8 @@ const reducer = combineReducers({
   languageList: languageListReducer,
   vacancyList: vacancyListReducer,
   vacancyDetails: vacancyDetailsReducer,
+  userVacancyInfo: userVacancyInfoReducer,
+  userVacancyList: userVacancyListReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

@@ -154,16 +154,19 @@ export default function AboutYouLanguageScreen() {
         <div className="card">
           {language.map((item, id) => (
             <div key={id}>
-              {item.rating}
-              {item.text}
-              <button
-                className="close"
-                onClick={() => deleteLanguage(item.text)}
-              ></button>
-              <button
-                onClick={() => editLanguage(item)}
-                className="edit"
-              ></button>
+              <div className="row">
+                {/* <div key={id}> */}
+                <div className="min-20">{item.rating}</div>
+                <div className="min-20">{item.text}</div>
+                <button
+                  className="close"
+                  onClick={() => deleteLanguage(item.text)}
+                ></button>
+                <button
+                  onClick={() => editLanguage(item)}
+                  className="edit"
+                ></button>
+              </div>
             </div>
           ))}
         </div>

@@ -250,20 +250,21 @@ export default function JobExperienceScreen() {
         <div className="card">
           {professionalXp.map((item, id) => (
             <div key={id}>
-              {item.jobTitle}
-              {item.companyName}
-              {item.startPeriod}
-              {item.endPeriod}
-              {item.description}
-              {/* {console.log('item map: ', item)} */}
-              <button
-                className="close"
-                onClick={() => deleteProfessionalXp(item)}
-              ></button>
-              <button
-                onClick={() => editProfessionalXp(item)}
-                className="edit"
-              ></button>
+              <div className="row">
+                <div className="min-20">{item.jobTitle}</div>
+                <div className="min-20">{item.companyName}</div>
+                <div className="min-20">{item.startPeriod}</div>
+                <div className="min-20">{item.endPeriod}</div>
+                <div className="min-20">{item.description}</div>
+                <button
+                  className="close"
+                  onClick={() => deleteProfessionalXp(item)}
+                ></button>
+                <button
+                  onClick={() => editProfessionalXp(item)}
+                  className="edit"
+                ></button>
+              </div>
             </div>
           ))}
         </div>

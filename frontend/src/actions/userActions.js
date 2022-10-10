@@ -18,9 +18,12 @@ export const registerAboutYouPi = (userPi) => async (dispatch) => {
     payload: { userPi },
   });
   try {
-    const { data } = await Axios.post('/api/users/registerAboutYouPi', {
-      userPi,
-    });
+    const { data } = await Axios.post(
+      'http://localhost:5000/api/users/registerAboutYouPi',
+      {
+        userPi,
+      }
+    );
     dispatch({ type: USER_REGISTERABOUTYOUPI_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -36,21 +39,17 @@ export const registerAboutYouPi = (userPi) => async (dispatch) => {
 
 export const register =
   (fullName, email, password, chkTpp) => async (dispatch) => {
-    console.log(
-      'fullName, email, password, chkTpp :',
-      fullName,
-      email,
-      password,
-      chkTpp
-    );
     dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
     try {
-      const { data } = await Axios.post('/api/users/register', {
-        fullName,
-        email,
-        password,
-        chkTpp,
-      });
+      const { data } = await Axios.post(
+        'http://localhost:5000/api/users/register',
+        {
+          fullName,
+          email,
+          password,
+          chkTpp,
+        }
+      );
       console.log('userActions - register - data: ', data);
       dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
       dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
@@ -69,7 +68,10 @@ export const register =
 export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post('/api/users/signin', { email, password });
+    const { data } = await Axios.post(
+      'http://localhost:5000/api/users/signin',
+      { email, password }
+    );
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {

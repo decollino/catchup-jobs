@@ -1,27 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { detailsVacancies } from '../actions/vacancyActions';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { createUserVacancy, detailsVacancies } from '../actions/vacancyActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Rating from '../components/Rating';
 
 export default function VacancyDetailScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [btnDisabled, setBtnDisabled] = useState(false);
+
   const { id: vacancyId } = useParams();
 
-  const [qty, setQty] = useState(1);
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/signin';
+
   const vacancyDetails = useSelector((state) => state.vacancyDetails);
   const { loading, error, vacancy } = vacancyDetails;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const userVacancyList = useSelector((state) => state.userVacancyList);
+  const { userVacancies } = userVacancyList;
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate(redirect);
+    }
     dispatch(detailsVacancies(vacancyId));
-  }, [dispatch, vacancyId]);
+  }, [dispatch, navigate, redirect, userInfo, vacancyId]);
 
-  const addToCartHandler = () => {
-    navigate(`/cart/${vacancyId}?qty=${qty}`);
+  useEffect(() => {
+    if (userVacancies.length !== 0) {
+      const testFind = userVacancies.find((v) => {
+        return v.vacancyId === parseInt(vacancyId);
+      });
+      if (testFind) {
+        setBtnDisabled(true);
+      } else {
+        setBtnDisabled(false);
+      }
+    }
+  }, [userVacancies, vacancyId]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const userVacancyInfo = {
+      userId: userInfo.id,
+      vacancyId: vacancy.id,
+    };
+
+    dispatch(createUserVacancy(userVacancyInfo));
+    navigate('/userVacancy');
   };
 
   return (
@@ -46,13 +77,6 @@ export default function VacancyDetailScreen() {
                 <li>
                   <h1>{vacancy.vacancyName}</h1>
                 </li>
-                {/* <li>
-                  <Rating
-                    rating={vacancy.rating}
-                    numReviews={vacancy.numReviews}
-                  ></Rating>
-                </li> */}
-                {/* <li>Price: ${vacancy.price}</li> */}
                 <li>
                   Description:
                   <p>{vacancy.vacancyDescription}</p>
@@ -62,59 +86,11 @@ export default function VacancyDetailScreen() {
             <div className="col-1">
               <div className="card card-body">
                 <ul>
-                  {/* <li>
-                    <div className="row">
-                      <div>Price</div>
-                      <div className="price">${vacancy.price}</div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="row">
-                      <div>Status</div>
-                      <div>
-                        {vacancy.countInStock > 0 ? (
-                          <span className="success">In Stock</span>
-                        ) : (
-                          <span className="danger">Unavailable</span>
-                        )}
-                      </div>
-                    </div>
-                  </li> */}
-                  {/* {vacancy.countInStock > 0 && (
-                    <>
-                      <li>
-                        <div className="row">
-                          <div>Qty</div>
-                          <div>
-                            <select
-                              value={qty}
-                              onChange={(e) => setQty(e.target.value)}
-                            >
-                              {[...Array(vacancy.countInStock).keys()].map(
-                                (x) => (
-                                  <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </option>
-                                )
-                              )}
-                            </select>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <button
-                          onClick={addToCartHandler}
-                          className="primary block"
-                        >
-                          Add to Cart
-                        </button>
-                      </li>
-                    </>
-                  )} */}
                   <li>
                     <button
-                      onClick={addToCartHandler}
+                      onClick={submitHandler}
                       className="primary block"
+                      disabled={btnDisabled}
                     >
                       APPLY NOW
                     </button>
