@@ -1,1 +1,1 @@
-web:node backend\index.js && npm start
+web: ./backend npm start
